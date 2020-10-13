@@ -50,8 +50,7 @@ sub action
     my(%EmailStr, $str);
     foreach my $u ( keys(%UserEmailInfo) ) {
         my $info;
-        if ( defined($UserEmailInfo{$u}{lastTime})
-                && ref($UserEmailInfo{$u}{lastTime}) ne 'HASH' ) {
+        if ( defined($UserEmailInfo{$u}{lastTime}) && ref($UserEmailInfo{$u}{lastTime}) ne 'HASH' ) {
             #
             # old format $UserEmailInfo - pre 3.2.0.
             #
@@ -76,11 +75,11 @@ sub action
 EOF
         }
     }
-    foreach my $t ( sort({$b <=> $a} keys(%EmailStr)) ) {
+    foreach my $t ( sort({ $b <=> $a } keys(%EmailStr)) ) {
         $str .= $EmailStr{$t};
     }
     my $content = eval("qq{$Lang->{Recent_Email_Summary}}");
-    Header($Lang->{Email_Summary}, $content);
+    Header("EmailSummary", $Lang->{Email_Summary}, $content);
     Trailer();
 }
 
